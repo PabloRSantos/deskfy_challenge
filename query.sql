@@ -1,7 +1,7 @@
 
 with RECURSIVE tree_folders (id, name, parentid) as (
     SELECT folders.id, folders.name, folders.parentid, folders.archived FROM users
-      LEFT JOIN user_groups ON user_groups.groupid = users.id
+      LEFT JOIN user_groups ON user_groups.userid = users.id
       LEFT JOIN groups ON groups.id = user_groups.userid
       LEFT JOIN file_groups ON file_groups.groupid = groups.id
       LEFT JOIN files ON files.id = file_groups.fileid 
