@@ -1,8 +1,9 @@
 
+
 with RECURSIVE tree_folders (id, name, parentid) as (
     SELECT folders.id, folders.name, folders.parentid, folders.archived FROM users
       LEFT JOIN user_groups ON user_groups.userid = users.id
-      LEFT JOIN groups ON groups.id = user_groups.userid
+      LEFT JOIN groups ON groups.id = user_groups.groupid
       LEFT JOIN file_groups ON file_groups.groupid = groups.id
       LEFT JOIN files ON files.id = file_groups.fileid 
   		OR files.id NOT IN (SELECT fileid FROM file_groups)
@@ -18,6 +19,10 @@ with RECURSIVE tree_folders (id, name, parentid) as (
   
   SELECT tf.id, tf.name, tf.parentid FROM tree_folders as tf WHERE archived = false ORDER BY parentid DESC
   
+
+
+  
+
 
 
 
